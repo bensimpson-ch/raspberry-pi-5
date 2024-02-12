@@ -1,0 +1,23 @@
+# This docker-compose file and Dockerfile can be taken separately from the toolchain project.
+version: '3.8'
+services:
+
+  nexus3:
+    # credentials can be fetched from command line: docker exec -it nexus cat /nexus-data/admin.password
+    build:
+      context: .
+    image: bensimpson-ch/nexus3:latest
+    container_name: nexus
+    volumes:
+      - nexus-data:/nexus-data
+    ports:
+      - 8081:8081
+    networks:
+      - nexus
+
+networks:
+  nexus:
+    driver: bridge
+
+volumes:
+  nexus-data:

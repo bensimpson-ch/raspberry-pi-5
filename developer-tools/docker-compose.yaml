@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+
+  nexus3:
+    build:
+      context: ./nexus
+    image: bensimpson-ch/nexus3:latest
+    container_name: nexus
+    volumes:
+      - nexus-data:/nexus-data
+    ports:
+      - 8081:8081
+    networks:
+      - toolchain
+
+networks:
+  toolchain:
+    driver: bridge
+
+volumes:
+  nexus-data:
