@@ -1,16 +1,6 @@
+# This docker-compose file and Dockerfile can be taken separately from the toolchain project.
 version: '3.8'
 services:
-
-  nexus3:
-    # credentials can be fetched from command line: docker exec -it nexus cat /nexus-data/admin.password
-    build:
-      context: ./nexus
-    image: bensimpson-ch/nexus3:latest
-    container_name: nexus
-    volumes:
-      - nexus-data:/nexus-data
-    ports:
-      - 8081:8081
 
   #documentation: https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/install-the-server/installing-sonarqube-from-docker/
   sonarqube:
@@ -41,12 +31,7 @@ services:
     volumes:
       - sonarqube-db-pgdata:/var/lib/postgresql/data
 
-networks:
-  toolchain:
-    driver: bridge
-
 volumes:
-  nexus-data:
   sonarqube-data:
   sonarqube-extensions:
   sonarqube-logs:
